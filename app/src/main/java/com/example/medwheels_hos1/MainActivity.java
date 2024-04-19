@@ -2,6 +2,7 @@ package com.example.medwheels_hos1;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -21,12 +22,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private Circle locationCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                             googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
+
+                            // Draw a circle around the current location
+                            if (locationCircle != null) {
+                                locationCircle.remove();
+                            }
+                            CircleOptions circleOptions = new CircleOptions()
+                                    .center(currentLocation)
+                                    .radius(500) // Set the radius in meters
+                                    .fillColor(0x20FF0000) // Set the fill color with transparency
+                                    .strokeColor(Color.RED) // Set the stroke color
+                                    .strokeWidth(5); // Set the stroke width
+                            locationCircle = googleMap.addCircle(circleOptions);
                         }
                     });
         }
