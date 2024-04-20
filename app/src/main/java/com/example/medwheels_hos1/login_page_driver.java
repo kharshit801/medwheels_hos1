@@ -14,28 +14,48 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class login_page_driver extends AppCompatActivity {
-    EditText email,pass;
-    TextView admin;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class login_page_driver extends AppCompatActivity {
+    EditText email, pass;
+    TextView admin;
+    Button finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_driver);
-        email=findViewById(R.id.loginemail);
-        pass=findViewById(R.id.loginpass);
-        admin=findViewById(R.id.admin);
+        email = findViewById(R.id.loginemail);
+        pass = findViewById(R.id.loginpass);
+        admin = findViewById(R.id.admin);
+        finish = findViewById(R.id.klop);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mail = email.getText().toString().trim();
+                String pwd = pass.getText().toString().trim();
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");
+                DatabaseReference reference = database.getReference("drivers");
+
+                HelperClass_driver helperClass = new HelperClass_driver(mail, pwd);
+                reference.child(mail.replace(".", ",")).setValue(helperClass);
+            }
+        });
 
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent=new Intent(login_page_driver.this, login_admin.class);
-                startActivity((intent));
+                Intent intent = new Intent(login_page_driver.this, login_admin.class);
+                startActivity(intent);
             }
         });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
