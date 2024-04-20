@@ -8,46 +8,43 @@
     android:layout_height="match_parent"
     tools:context=".patRecyclerView">
 
-   <androidx.cardview.widget.CardView
-       android:id="@+id/card"
-       android:layout_width="match_parent"
-       android:layout_height="800dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="28dp"
+        android:layout_marginBottom="-20dp">
 
-       android:layout_alignParentBottom="true"
-       app:cardCornerRadius="28dp"
-       android:layout_marginBottom="-20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:textSize="30dp"
-               android:text="Patient List"
-               android:gravity="center"
-               android:layout_marginTop="10dp"
-               android:fontFamily="@font/regular_semi_bold"
-               android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="Patient List"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/regular_semi_bold"
+                android:textColor="@color/black"/>
 
-           <View
-               android:layout_width="match_parent"
-               android:layout_height="15dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:scrollbars="vertical" />
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/recyclerView"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_marginTop="10dp"
-               android:clickable="true"
-               android:scrollbars="vertical" />
+        </LinearLayout>
 
-
-       </LinearLayout>
-
-   </androidx.cardview.widget.CardView>
-
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
