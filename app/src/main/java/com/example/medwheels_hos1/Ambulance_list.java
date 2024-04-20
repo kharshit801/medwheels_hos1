@@ -49,13 +49,14 @@ public class Ambulance_list extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String email = dataSnapshot.child("email").getValue(String.class);
                     String pass = dataSnapshot.child("pass").getValue(String.class);
+                    String name = dataSnapshot.child("name").getValue(String.class);
                     Double latitudeValue = dataSnapshot.child("latitude").getValue(Double.class);
                     Double longitudeValue = dataSnapshot.child("longitude").getValue(Double.class);
 
                     double latitude = latitudeValue != null ? latitudeValue : 0.0;
                     double longitude = longitudeValue != null ? longitudeValue : 0.0;
 
-                    HelperClass_driver helper = new HelperClass_driver(email, pass, latitude, longitude);
+                    HelperClass_driver helper = new HelperClass_driver(email, pass, latitude, longitude,name);
                     driverList.add(helper);
                 }
                 driverAdapter.notifyDataSetChanged();
