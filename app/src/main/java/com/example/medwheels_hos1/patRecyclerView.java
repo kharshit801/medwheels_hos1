@@ -44,6 +44,8 @@ public class patRecyclerView extends AppCompatActivity {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HelperClass helper = dataSnapshot.getValue(HelperClass.class);
                     list.add(helper);
