@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.maps.DistanceMatrixApiRequest;
-import com.google.maps.android.DistanceMatrixApi;
+//import com.google.maps.android.DistanceMatrixApi;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.TravelMode;
 
@@ -178,39 +178,39 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .addOnSuccessListener(this, location -> {
                         if (location != null) {
                             LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                            calculateDistance(currentLocation, desiredLocation);
+//                            calculateDistance(currentLocation, desiredLocation);
                         }
                     });
         }
     }
-    private void calculateDistance(LatLng origin, LatLng destination) {
-        String[] origins = {origin.latitude + "," + origin.longitude};
-        String[] destinations = {destination.latitude + "," + destination.longitude};
-
-        DistanceMatrixApiRequest request = DistanceMatrixApi.newRequest(getGeoContext())
-                .origins(origins)
-                .destinations(destinations)
-                .mode(TravelMode.DRIVING)
-                .language("en")
-                .await();
-
-        try {
-            DistanceMatrix matrix = request.await();
-            if (matrix.rows.length > 0 && matrix.rows[0].elements.length > 0) {
-                DistanceMatrixApiResponse.DistanceMatrixRow row = matrix.rows[0];
-                DistanceMatrixApiResponse.DistanceMatrixElement element = row.elements[0];
-                String distance = element.distance.humanReadable;
-                Log.d("Distance", "Distance between locations: " + distance);
-                // You can display the distance on the map or in a UI element
-            }
-        } catch (ApiException e) {
-            Log.e("Distance", "Failed to calculate distance: " + e.getMessage());
-        } catch (InterruptedException e) {
-            Log.e("Distance", "Thread interrupted: " + e.getMessage());
-        } catch (IOException e) {
-            Log.e("Distance", "I/O error: " + e.getMessage());
-        }
-    }
+//    private void calculateDistance(LatLng origin, LatLng destination) {
+//        String[] origins = {origin.latitude + "," + origin.longitude};
+//        String[] destinations = {destination.latitude + "," + destination.longitude};
+//
+//        DistanceMatrixApiRequest request = DistanceMatrixApi.newRequest(getGeoContext())
+//                .origins(origins)
+//                .destinations(destinations)
+//                .mode(TravelMode.DRIVING)
+//                .language("en")
+//                .await();
+//
+//        try {
+//            DistanceMatrix matrix = request.await();
+//            if (matrix.rows.length > 0 && matrix.rows[0].elements.length > 0) {
+//                DistanceMatrixApiResponse.DistanceMatrixRow row = matrix.rows[0];
+//                DistanceMatrixApiResponse.DistanceMatrixElement element = row.elements[0];
+//                String distance = element.distance.humanReadable;
+//                Log.d("Distance", "Distance between locations: " + distance);
+//                // You can display the distance on the map or in a UI element
+//            }
+//        } catch (ApiException e) {
+//            Log.e("Distance", "Failed to calculate distance: " + e.getMessage());
+//        } catch (InterruptedException e) {
+//            Log.e("Distance", "Thread interrupted: " + e.getMessage());
+//        } catch (IOException e) {
+//            Log.e("Distance", "I/O error: " + e.getMessage());
+//        }
+//    }
 
 }
 
