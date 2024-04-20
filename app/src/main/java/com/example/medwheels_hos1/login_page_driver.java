@@ -38,6 +38,7 @@ public class login_page_driver extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private LocationCallback locationCallback;
     double mylongitude,mylatitude;
+    Button finish1;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
@@ -79,11 +80,14 @@ public class login_page_driver extends AppCompatActivity {
                 String mail = email.getText().toString().trim();
                 String pwd = pass.getText().toString().trim();
 
+
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");
                 DatabaseReference reference = database.getReference("drivers");
 
                 HelperClass_driver helperClass = new HelperClass_driver(mail, pwd,mylatitude,mylongitude);
                 reference.child(mail.replace(".", ",")).setValue(helperClass);
+                Intent intent=new Intent(login_page_driver.this,Driver_landing_page.class);
+                startActivity(intent);
             }
         });
 
