@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -11,6 +12,132 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
+        android:layout_above="@id/card"
         android:layout_height="match_parent"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="28dp"
+        android:layout_marginBottom="-20dp"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/D"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <View
+                android:id="@+id/G"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:textSize="18sp"
+                android:fontFamily="@font/regular_semi_bold"
+                android:alpha="1"/>
+            <TextView
+                android:id="@+id/namePat"
+                android:layout_marginLeft="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harshit K. Jayaswal"
+                android:textSize="18sp"
+                android:fontFamily="@font/regular_semi_bold"
+                android:alpha="1"/>
+                <ImageView
+                    android:id="@+id/pdfBtn"
+                    android:backgroundTint="@color/black"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/pdf_file"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone No:"
+                android:fontFamily="@font/regular_semi_bold"
+                android:alpha="1"/>
+
+                <TextView
+                    android:id="@+id/phoneNumber"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="13sp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7830080495"
+                    android:fontFamily="@font/regular_semi_bold"
+                    android:alpha="1"/>
+
+            </LinearLayout>
+
+
+
+
+            <View
+                android:id="@+id/P"
+
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Assign Ambulance"
+                android:textAllCaps="false"
+                android:letterSpacing="0.06"
+                android:fontFamily="@font/regular_semi_bold"
+                android:elevation="8dp"
+                android:translationZ="8dp"
+                android:id="@+id/assign_ambu"
+                app:cornerRadius="32dp"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Cancel"
+
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"
+                android:textAllCaps="false"
+                android:letterSpacing="0.06"
+                android:fontFamily="@font/regular_semi_bold"
+                android:elevation="8dp"
+                android:translationZ="8dp"
+                android:id="@+id/cancel_button"
+                app:cornerRadius="32dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/Q"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
