@@ -1,7 +1,6 @@
 package com.example.medwheels_hos1;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,15 +18,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Ambulance_list extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseReference database;
     ArrayList<HelperClass_driver> driverList;
-
     DriverAdapter driverAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +46,26 @@ public class Ambulance_list extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 driverList.clear();
 
-
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    HelperClass_driver helper = dataSnapshot.getValue(HelperClass_driver.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+                    String pass = dataSnapshot.child("pass").getValue(String.class);
+                    Double latitudeValue = dataSnapshot.child("latitude").getValue(Double.class);
+                    Double longitudeValue = dataSnapshot.child("longitude").getValue(Double.class);
 
+                    double latitude = latitudeValue != null ? latitudeValue : 0.0;
+                    double longitude = longitudeValue != null ? longitudeValue : 0.0;
 
+                    HelperClass_driver helper = new HelperClass_driver(email, pass, latitude, longitude);
                     driverList.add(helper);
-
                 }
                 driverAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle error case
             }
         });
-
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

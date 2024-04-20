@@ -34,7 +34,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         HelperClass_driver helperClassDriver = driverList.get(position);
-
+        holder.Name.setText(helperClassDriver.getEmail());
 
 
         holder.itemView.setOnClickListener(v -> {

@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/driverName"
-                android:layout_width="298dp"
+                android:layout_width="268dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
