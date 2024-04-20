@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recycler"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    android:backgroundTint="@color/my_primary"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/patName"
+        android:text="patient name"/>
+
+
+
+</androidx.cardview.widget.CardView>
