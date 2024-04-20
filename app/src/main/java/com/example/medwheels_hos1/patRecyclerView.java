@@ -119,10 +119,15 @@ public class patRecyclerView extends AppCompatActivity {
 
                     if(2*6371*Math.asin(Math.sqrt(Math.pow(Math.sin((latitude-0.44490696726064405)/2),2)+Math.cos(latitude)*Math.cos(0.44490696726064405)*Math.pow(Math.sin((longitude-1.4287864166558406)/2),2)))<20)
                     {
-                        Toast.makeText(patRecyclerView.this,"notification given",Toast.LENGTH_SHORT).show();
-                        makenotifications();
 
-                        list.add(helper);
+                        if (helper.getSos().equals("1")){
+                            list.add(helper);
+//                            Toast.makeText(patRecyclerView.this,"notification given",Toast.LENGTH_SHORT).show();
+                            makenotifications();
+
+                        }
+
+
                     }
                     else
                         Toast.makeText(patRecyclerView.this,"no notification given",Toast.LENGTH_SHORT).show();
