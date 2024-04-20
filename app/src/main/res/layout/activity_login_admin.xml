@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity"
+    android:id="@+id/main">
+
+
+
+
+    <LinearLayout
+        android:id="@+id/B"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/card"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="28dp" >
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo_line_white"
+            android:padding="100px"/>
+
+
+
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="28dp"
+        android:layout_marginBottom="-20dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/D"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:id="@+id/E"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WELCOME"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.9"
+                android:fontFamily="@font/regular_light"
+                android:text="LOGIN AS ADMIN" />
+
+            <View
+                android:id="@+id/G"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/H"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="1"
+                android:fontFamily="@font/regular_semi_bold"
+                android:text="EMAIL:" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/M11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/loginemail"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+
+
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/J"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/K"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="1"
+                android:fontFamily="@font/regular_semi_bold"
+                android:text="PASSWORD:" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/M1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=""
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/loginpass"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <View
+                android:id="@+id/P"
+
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/klop"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:elevation="8dp"
+                android:fontFamily="@font/regular_semi_bold"
+                android:letterSpacing="0.06"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:translationZ="8dp"
+                app:cornerRadius="32dp" />
+
+            <View
+                android:id="@+id/Q"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
