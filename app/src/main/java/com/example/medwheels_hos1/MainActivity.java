@@ -10,7 +10,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Circle locationCircle;
     Button assign;
     ImageView createpdfBtn;
+    TextView name;
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         assign=findViewById(R.id.assign_ambu);
 
         createpdfBtn = findViewById(R.id.pdfBtn);
+        name=findViewById(R.id.namePat);
+        name.setText(getIntent().getStringExtra("name"));
 
         createpdfBtn.setOnClickListener(new View.OnClickListener() {
             @Override

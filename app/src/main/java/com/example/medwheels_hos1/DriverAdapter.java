@@ -44,9 +44,10 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.MyViewHold
 
         holder.assign.setOnClickListener(v ->
         {
-            String patMail="hardcoded@gmail.com", patName="hardcoded", driverName=helperClassDriver.getName(), driverMail=helperClassDriver.getEmail();
-            double latitude=1, longitude=2;
-            Log.d("Tag","name"+driverName+driverMail);
+
+            String patMail = "hardcoded@gmail.com", patName = "hardcoded", driverName = helperClassDriver.getName(), driverMail = helperClassDriver.getEmail();
+            double latitude = 1, longitude = 2;
+            Log.d("Tag", "name" + driverName + driverMail);
             FirebaseDatabase database1 = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");
             DatabaseReference reference1 = database1.getReference("assign");
             HelperClass_assign helperClass = new HelperClass_assign(patMail, driverMail, patName, driverName, latitude, longitude);
@@ -56,6 +57,10 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.MyViewHold
             String driverMailKey = driverMail == null ? "" : driverMail.replace(".", ",");
             String key = patMailKey + "and" + driverMailKey;
             reference1.child(key).setValue(helperClass);
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra("name", patName);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude",longitude);
         });
 
         holder.itemView.setOnClickListener(v -> {
@@ -79,4 +84,4 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.MyViewHold
             assign = itemView.findViewById(R.id.assign);
         }
     }
-}
+    }

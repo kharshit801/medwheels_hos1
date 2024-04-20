@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".patientInfo"
+    android:background="@color/black">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/det"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient Details"
+                android:textColor="@color/black"
+                android:fontFamily="@font/regular_semi_bold"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:id="@+id/view1"
+                android:layout_below="@id/det"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:id="@+id/name"
+                android:layout_below="@id/view1"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/name1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1"
+                android:layout_marginStart="50dp"
+                android:layout_toEndOf="@id/name"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/view2"
+                android:layout_below="@id/name"/>
+
+            <TextView
+                android:id="@+id/dob"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view2"
+                android:layout_marginLeft="10dp"
+                android:text="Date of Birth:"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dob1"
+                android:layout_toEndOf="@id/name"
+                android:layout_marginStart="50dp"
+                android:layout_below="@id/view2"
+                android:textSize="20dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/view3"
+                android:layout_below="@id/dob"/>
+
+            <TextView
+                android:id="@+id/group"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view3"
+                android:layout_marginLeft="10dp"
+                android:text="Blood Group:"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/group1"
+                android:layout_toEndOf="@id/name"
+                android:layout_marginStart="50dp"
+                android:layout_below="@id/view3"
+                android:textSize="20dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/view4"
+                android:layout_below="@id/group"/>
+
+            <TextView
+                android:id="@+id/Allergies"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view4"
+                android:layout_marginLeft="10dp"
+                android:text="Allergies:"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Allergies1"
+                android:layout_toEndOf="@id/name"
+                android:layout_marginStart="50dp"
+                android:layout_below="@id/view4"
+                android:textSize="20dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/view5"
+                android:layout_below="@id/Allergies"/>
+
+            <TextView
+                android:id="@+id/Medical_History"
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:layout_below="@id/view5"
+                android:layout_marginLeft="10dp"
+                android:text="MedicalHistory:"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Medical_History1"
+                android:layout_toEndOf="@id/name"
+                android:layout_marginStart="50dp"
+                android:layout_below="@id/view5"
+                android:textSize="20dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/view6"
+                android:layout_below="@id/Medical_History"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

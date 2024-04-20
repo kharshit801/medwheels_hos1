@@ -16,23 +16,39 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="8dp">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="108dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/patient"/>
-
-    <TextView
-        android:id="@+id/patName"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/regular_semi_bold"
-        android:gravity="center"
-        android:text="patient name"
-        android:textSize="20dp" />
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="108dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/patient"/>
+
+        <TextView
+            android:id="@+id/patName"
+            android:layout_width="wrap_content"
+            android:layout_height="53dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/image"
+            android:fontFamily="@font/regular_semi_bold"
+            android:gravity="center"
+            android:text="patient name"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/ass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:text="Details" />
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
 </RelativeLayout>
