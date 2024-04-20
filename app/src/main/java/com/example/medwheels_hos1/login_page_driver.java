@@ -85,8 +85,7 @@ public class login_page_driver extends AppCompatActivity {
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");
                 DatabaseReference reference = database.getReference("drivers");
-
-                HelperClass_driver helperClass = new HelperClass_driver(mail, pwd,mylatitude,mylongitude);
+                HelperClass_driver helperClass = new HelperClass_driver(mail, pwd,mylatitude,mylongitude,driverName);
                 reference.child(mail.replace(".", ",")).setValue(helperClass);
                 Intent intent=new Intent(login_page_driver.this,Driver_landing_page.class);
                 startActivity(intent);
@@ -130,7 +129,7 @@ public class login_page_driver extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 requestLocationUpdates();
             } else {
-                // Permission denied, handle accordingly
+
             }
         }
     }
