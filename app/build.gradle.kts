@@ -47,6 +47,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.itextpdf:kernel:7.2.5")
+    implementation("com.itextpdf:io:7.2.5")
+    implementation("com.itextpdf:layout:7.2.5")
 
 
 

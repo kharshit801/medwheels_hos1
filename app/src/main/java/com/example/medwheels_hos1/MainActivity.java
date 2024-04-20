@@ -1,6 +1,7 @@
 package com.example.medwheels_hos1;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 //import org.apache.pdfbox.pdmodel.PDDocument;
@@ -44,6 +47,10 @@ import com.google.maps.DistanceMatrixApiRequest;
 //import com.google.maps.android.DistanceMatrixApi;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.TravelMode;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 
 import java.io.File;
@@ -70,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         createpdfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pdfFileName = "my_pdf_file.pdf";
-                String pdfContent = "This is the content of my PDF file.";
-//                generatePDF(pdfFileName, pdfContent);
+                String userInput ="Harshit"; // Get the user input from an EditText
+                String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myPdf.pdf"; // Set the file name and path
+                createPdf(userInput, fileName); // Call the createPdf method
             }
         });
         assign.setOnClickListener(new View.OnClickListener() {
@@ -298,6 +305,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //    } catch (IOException e) {
 //        e.printStackTrace();
 //    }
+public  void createPdf(String userInput, String fileName) {
+    try {
+        // Create a new PDF document
+        PdfWriter writer = new PdfWriter(new FileOutputStream(fileName));
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc);
+
+        // Add the user input to the document
+        document.add(new Paragraph(userInput));
+
+        // Close the document
+        document.close();
+
+        // Show a success message
+        Toast.makeText(this, "PDF created successfully", Toast.LENGTH_SHORT).show();
+    } catch (FileNotFoundException e) {
+        Toast.makeText(this, "PDF failed", Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
+    }
+}
 }
 
 
