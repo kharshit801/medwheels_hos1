@@ -66,6 +66,11 @@ public class patRecyclerView extends AppCompatActivity {
                 for (Location location : locationResult.getLocations()) {
                     mylatitude = location.getLatitude()*Math.PI/180;
                     mylongitude = location.getLongitude()*Math.PI/180;
+                    while(true)
+                    {
+                        if(mylatitude!=0.0 && mylongitude!=0.0)
+                            break;
+                    }
 
                     Log.d("LocationUpdate", "Latitude: " + mylatitude + ", Longitude: " + mylongitude);
 

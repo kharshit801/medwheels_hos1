@@ -65,6 +65,37 @@
                 android:layout_height="20dp" />
 
             <TextView
+                android:id="@+id/driver__Name"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="1"
+                android:fontFamily="@font/regular_semi_bold"
+                android:text="NAME:" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/M14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/driver_name"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+
+
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <View
+                android:id="@+id/J23"
+
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
                 android:id="@+id/H"
 
                 android:layout_width="wrap_content"
