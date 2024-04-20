@@ -81,7 +81,6 @@ public class login_page_driver extends AppCompatActivity {
                 String pwd = pass.getText().toString().trim();
                 String driverName = driver_name.getText().toString().trim(); // Get the driver name
 
-
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");
                 DatabaseReference reference = database.getReference("drivers");
                 HelperClass_driver helperClass = new HelperClass_driver(mail, pwd,mylatitude,mylongitude,driverName);
