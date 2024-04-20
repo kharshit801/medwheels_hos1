@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +26,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,13 +44,36 @@ public class patRecyclerView extends AppCompatActivity {
     DatabaseReference database;
     ArrayList<HelperClass> list;
     Myadapter myAdapter;
-
+    private FusedLocationProviderClient fusedLocationClient;
+    private LocationCallback locationCallback;
+    double mylongitude,mylatitude;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pat_recycler_view);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    mylatitude = location.getLatitude()*Math.PI/180;
+                    mylongitude = location.getLongitude()*Math.PI/180;
+
+                    Log.d("LocationUpdate", "Latitude: " + mylatitude + ", Longitude: " + mylongitude);
+
+                }
+            }
+        };
+
+        requestLocationUpdates();
 
         recyclerView = findViewById(R.id.recyclerView);
         database = FirebaseDatabase.getInstance().getReference("patient");
@@ -72,10 +102,17 @@ public class patRecyclerView extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HelperClass helper = dataSnapshot.getValue(HelperClass.class);
 
-                    Double latitude = (helper.getLongitude())*Math.PI/180;
-                    Double longitude = (helper.getLatitude())*Math.PI/180;
+                    Double latitude = (helper.getLatitude())*Math.PI/180;
+                    Double longitude = (helper.getLongitude())*Math.PI/180;
 
-                    if(2*6731*Math.asin(Math.sqrt(Math.pow(Math.sin((latitude-0.443920899)/2),2)+Math.cos(latitude)*Math.cos(0.443920899)*Math.pow(Math.sin((longitude-1.42713979)/2),2)))<10)
+                    Log.d("Location", "Latitude_database: " + latitude + ", Longitude_database: " + longitude);
+
+
+
+                    double distance = 2*6371*Math.asin(Math.sqrt(Math.pow(Math.sin((latitude-0.44490696726064405)/2),2)+Math.cos(latitude)*Math.cos(0.44490696726064405)*Math.pow(Math.sin((longitude-1.4287864166558406)/2),2)));
+                    Log.d("LocationUpdate", "distance: " + distance );
+
+                    if(2*6371*Math.asin(Math.sqrt(Math.pow(Math.sin((latitude-0.44490696726064405)/2),2)+Math.cos(latitude)*Math.cos(0.44490696726064405)*Math.pow(Math.sin((longitude-1.4287864166558406)/2),2)))<20)
                     {
                         Toast.makeText(patRecyclerView.this,"notification given",Toast.LENGTH_SHORT).show();
                         makenotifications();
@@ -90,6 +127,10 @@ public class patRecyclerView extends AppCompatActivity {
                 }
                 myAdapter.notifyDataSetChanged();
             }
+
+
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -148,6 +189,40 @@ public class patRecyclerView extends AppCompatActivity {
         }
         notificationManager.notify(0,builder.build());
 
+    }
+
+    private void requestLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request location permissions if not granted
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+            return;
+        }
+
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000); // Update interval in milliseconds
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                requestLocationUpdates();
+            } else {
+                // Permission denied, handle accordingly
+            }
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
 }
