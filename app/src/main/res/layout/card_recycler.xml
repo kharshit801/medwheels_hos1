@@ -7,8 +7,8 @@
     android:layout_width="match_parent">
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-
+    android:layout_height="100dp"
+    android:backgroundTint="@color/white"
     android:id="@+id/recycler"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
@@ -19,20 +19,19 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="108dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/patient"/>
 
     <TextView
         android:id="@+id/patName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        android:gravity="center"
         android:fontFamily="@font/regular_semi_bold"
-        android:textSize="20dp"
-        android:text="patient name" />
-
+        android:gravity="center"
+        android:text="patient name"
+        android:textSize="20dp" />
 
 
 </androidx.cardview.widget.CardView>
