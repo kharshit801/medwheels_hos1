@@ -47,5 +47,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.tom_roush:pdfbox-android:1.8.10.1")
+    implementation("org.apache.pdfbox:pdfbox:2.0.24")
+
 
 }

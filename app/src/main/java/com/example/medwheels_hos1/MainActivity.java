@@ -5,9 +5,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -34,6 +45,12 @@ import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.TravelMode;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -43,13 +60,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private Circle locationCircle;
     Button assign;
-
+    ImageView createpdfBtn;
+    private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         assign=findViewById(R.id.assign_ambu);
+
+        createpdfBtn = findViewById(R.id.pdfBtn);
+
+        createpdfBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pdfFileName = "my_pdf_file.pdf";
+                String pdfContent = "This is the content of my PDF file.";
+                generatePDF(pdfFileName, pdfContent);
+            }
+        });
         assign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +108,46 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    private void createPdfDocument() {
+        String name = "Harshit";
+        String email = "kharshit801@gmail.com";
+        // ... (get other user input data)
+
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "MyPdfDocument.pdf");
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+            contentStream.newLineAtOffset(25, 700);
+            contentStream.showText("Name: " + name);
+            contentStream.newLine();
+            contentStream.showText("Email: " + email);
+            // ... (add other user input data)
+            contentStream.endText();
+            contentStream.close();
+
+            document.save(file);
+            document.close();
+
+            Toast.makeText(this, "PDF document created successfully", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error creating PDF document", Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            enableMyLocation();
+        if (requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can create the PDF document
+            } else {
+                // Permission denied, handle the case accordingly
+            }
         }
     }
 
@@ -156,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+
 //    private void getDeviceLocation() {
 //        // Set the desired latitude and longitude
 //        double latitude = 25.431474; // San Francisco, CA
@@ -226,6 +291,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            Log.e("Distance", "I/O error: " + e.getMessage());
 //        }
 //    }
+private void generatePDF(String pdfFileName, String pdfContent) {
+    try {
+        // Create a new PDF document
+        PDDocument document = new PDDocument();
+
+        // Create a new blank page in the document
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        // Create a PDPageContentStream object to write content to the page
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+        // Begin text operations
+        contentStream.beginText();
+
+        // Set the font and font size
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+
+        // Set the leading (line spacing)
+        contentStream.setLeading(14.5f);
+
+        // Write the content to the page
+        contentStream.newLineAtOffset(25, 700);
+        contentStream.showText(pdfContent);
+
+        // End text operations
+        contentStream.endText();
+
+        // Close the content stream
+        contentStream.close();
+
+        // Save the document to a file
+        File file = new File(getExternalFilesDir(null), pdfFileName);
+        document.save(file);
+
+        // Close the document
+        document.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
 }
 
