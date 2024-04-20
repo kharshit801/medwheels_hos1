@@ -44,10 +44,7 @@ public class patRecyclerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pat_recycler_view);
-        if(2*6731*Math.asin(Math.sqrt(Math.pow(Math.sin((81.7705-80.7705)/2),2)+Math.cos(81.7705)*Math.cos(80.7705)*Math.pow(Math.sin((25.431474-24.431474)/2),2)))<10)
-            Toast.makeText(patRecyclerView.this,"notification given",Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(patRecyclerView.this,"no notification given",Toast.LENGTH_SHORT).show();
+
         recyclerView = findViewById(R.id.recyclerView);
         database = FirebaseDatabase.getInstance().getReference("patient");
         recyclerView.setHasFixedSize(true);
@@ -71,15 +68,23 @@ public class patRecyclerView extends AppCompatActivity {
                 list.clear();
 
 
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HelperClass helper = dataSnapshot.getValue(HelperClass.class);
 
+                    Double latitude = (helper.getLongitude())*Math.PI/180;
+                    Double longitude = (helper.getLatitude())*Math.PI/180;
 
-                    makenotifications();
+                    if(2*6731*Math.asin(Math.sqrt(Math.pow(Math.sin((latitude-0.443920899)/2),2)+Math.cos(latitude)*Math.cos(0.443920899)*Math.pow(Math.sin((longitude-1.42713979)/2),2)))<10)
+                    {
+                        Toast.makeText(patRecyclerView.this,"notification given",Toast.LENGTH_SHORT).show();
+                        makenotifications();
 
+                        list.add(helper);
+                    }
+                    else
+                        Toast.makeText(patRecyclerView.this,"no notification given",Toast.LENGTH_SHORT).show();
 
-
-                    list.add(helper);
 
 
                 }
