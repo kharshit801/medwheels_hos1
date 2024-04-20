@@ -27,10 +27,10 @@
             android:name=".patRecyclerView"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".login_page_driver"
             android:exported="false" />
         <activity
-            android:name=".login_page_driver"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

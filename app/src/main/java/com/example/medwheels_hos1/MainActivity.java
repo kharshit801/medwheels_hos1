@@ -112,77 +112,77 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            locationCircle = googleMap.addCircle(circleOptions);}
 //    }
 
-//    private void getDeviceLocation() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            fusedLocationClient.getLastLocation()
-//                    .addOnSuccessListener(this, location -> {
-//                        if (location != null) {
-//                            double latitude = 25.431474; //IIIT ALLAHABAD
-//                            double longitude = 81.770500;
-//                            LatLng currentLocation = new LatLng(latitude, longitude);
-//                            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Accident Location"));
-//                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
-//
-//                            // Draw a circle around the current location
-//                            if (locationCircle != null) {
-//                                locationCircle.remove();
-//                            }
-//                            CircleOptions circleOptions = new CircleOptions()
-//                                    .center(currentLocation)
-//                                    .radius(500) // Set the radius in meters
-//                                    .fillColor(0x20FF0000) // Set the fill color with transparency
-//                                    .strokeColor(Color.RED) // Set the stroke color
-//                                    .strokeWidth(5); // Set the stroke width
-//                            locationCircle = googleMap.addCircle(circleOptions);
-//
-//                        }
-//                    });
-//        }
-//    }
-
     private void getDeviceLocation() {
-        // Set the desired latitude and longitude
-        double latitude = 37.7749; // San Francisco, CA
-        double longitude = -122.4194;
-
-        LatLng desiredLocation = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions().position(desiredLocation).title("Desired Location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(desiredLocation, 15f));
-
-        // Draw a circle around the desired location
-        if (desiredLocation != null) {
-            if (locationCircle != null) {
-                locationCircle.remove();
-            }
-            CircleOptions circleOptions = new CircleOptions()
-                    .center(desiredLocation)
-                    .radius(500) // Set the radius in meters
-                    .fillColor(0xE2856E) // Set the fill color
-                    .strokeColor(0x1e1e1e) // Set the stroke color
-                    .strokeWidth(5); // Set the stroke width
-            locationCircle = googleMap.addCircle(circleOptions);
-
-            // Calculate the distance between your current location and the desired location
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, location -> {
                         if (location != null) {
-                            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-//                            calculateDistance(currentLocation, desiredLocation);
+                            double latitude = 25.431474; //IIIT ALLAHABAD
+                            double longitude = 81.770500;
+                            LatLng currentLocation = new LatLng(latitude, longitude);
+                            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Accident Location"));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
+
+                            // Draw a circle around the current location
+                            if (locationCircle != null) {
+                                locationCircle.remove();
+                            }
+                            CircleOptions circleOptions = new CircleOptions()
+                                    .center(currentLocation)
+                                    .radius(1000) // Set the radius in meters
+                                    .fillColor(0x20FF0000) // Set the fill color with transparency
+                                    .strokeColor(Color.RED) // Set the stroke color
+                                    .strokeWidth(5); // Set the stroke width
+                            locationCircle = googleMap.addCircle(circleOptions);
+
                         }
                     });
         }
     }
+
+//    private void getDeviceLocation() {
+//        // Set the desired latitude and longitude
+//        double latitude = 25.431474; // San Francisco, CA
+//        double longitude = 81.770500;
+//
+//        LatLng desiredLocation = new LatLng(latitude, longitude);
+//        googleMap.addMarker(new MarkerOptions().position(desiredLocation).title("Accident Location"));
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(desiredLocation, 15f));
+//
+//        // Draw a circle around the desired location
+//        if (desiredLocation != null) {
+//            if (locationCircle != null) {
+//                locationCircle.remove();
+//            }
+//            CircleOptions circleOptions = new CircleOptions()
+//                    .center(desiredLocation)
+//                    .radius(500) // Set the radius in meters
+//                    .fillColor(0xE2856E) // Set the fill color
+//                    .strokeColor(0x1e1e1e) // Set the stroke color
+//                    .strokeWidth(5); // Set the stroke width
+//            locationCircle = googleMap.addCircle(circleOptions);
+//
+//            // Calculate the distance between your current location and the desired location
+//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                // TODO: Consider calling
+//                //    ActivityCompat#requestPermissions
+//                // here to request the missing permissions, and then overriding
+//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                //                                          int[] grantResults)
+//                // to handle the case where the user grants the permission. See the documentation
+//                // for ActivityCompat#requestPermissions for more details.
+//                return;
+//            }
+//            fusedLocationClient.getLastLocation()
+//                    .addOnSuccessListener(this, location -> {
+//                        if (location != null) {
+//                            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+////                            calculateDistance(currentLocation, desiredLocation);
+//                        }
+//                    });
+//        }
+//    }
 //    private void calculateDistance(LatLng origin, LatLng destination) {
 //        String[] origins = {origin.latitude + "," + origin.longitude};
 //        String[] destinations = {destination.latitude + "," + destination.longitude};
