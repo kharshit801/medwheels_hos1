@@ -30,7 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class login_page_driver extends AppCompatActivity {
-    EditText email, pass;
+    EditText email, pass, driver_name;
     TextView admin;
     Button finish;
     private GoogleMap googleMap;
@@ -69,6 +69,7 @@ public class login_page_driver extends AppCompatActivity {
 
         email = findViewById(R.id.loginemail);
         pass = findViewById(R.id.loginpass);
+        driver_name = findViewById(R.id.driver_name); // Add this line
         admin = findViewById(R.id.admin);
         finish = findViewById(R.id.klop);
 
@@ -79,6 +80,7 @@ public class login_page_driver extends AppCompatActivity {
             public void onClick(View v) {
                 String mail = email.getText().toString().trim();
                 String pwd = pass.getText().toString().trim();
+                String driverName = driver_name.getText().toString().trim(); // Get the driver name
 
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://medwheels-4b07d-default-rtdb.asia-southeast1.firebasedatabase.app");

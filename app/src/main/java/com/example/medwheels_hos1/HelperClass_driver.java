@@ -1,14 +1,14 @@
 package com.example.medwheels_hos1;
 
 public class HelperClass_driver {
-    String email,pass;
-    double latitude,longitude;
+    String email, pass;
+    double latitude, longitude;
 
-    public HelperClass_driver(String email,String pass,double latitude,double longitude) {
+    public HelperClass_driver(String email, String pass, double latitude, double longitude) {
         this.email = email;
-        this.pass=pass;
-        this.latitude=latitude;
-        this.longitude=longitude;
+        this.pass = pass;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getEmail() {
@@ -26,6 +26,7 @@ public class HelperClass_driver {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
 
     public double getLatitude() {
         return latitude;
