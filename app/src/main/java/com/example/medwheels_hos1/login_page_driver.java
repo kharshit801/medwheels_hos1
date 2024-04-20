@@ -33,9 +33,8 @@ public class login_page_driver extends AppCompatActivity {
     EditText email, pass;
     TextView admin;
     Button finish;
-    private GoogleMap googleMap;
+
     private FusedLocationProviderClient fusedLocationClient;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private LocationCallback locationCallback;
     double mylongitude,mylatitude;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
