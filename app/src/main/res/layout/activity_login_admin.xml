@@ -20,15 +20,6 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="28dp" >
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo_line_white"
-            android:padding="100px"/>
-
-
-
 
 
     </LinearLayout>
@@ -36,7 +27,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_height="800dp"
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="28dp"
         android:layout_marginBottom="-20dp"
@@ -65,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.9"
                 android:fontFamily="@font/regular_light"
-                android:text="LOGIN AS ADMIN" />
+                android:text="REGISTER AS ADMIN" />
 
             <View
                 android:id="@+id/G"
@@ -145,7 +136,7 @@
                 android:elevation="8dp"
                 android:fontFamily="@font/regular_semi_bold"
                 android:letterSpacing="0.06"
-                android:text="Login"
+                android:text="FINISH"
                 android:textAllCaps="false"
                 android:translationZ="8dp"
                 app:cornerRadius="32dp" />

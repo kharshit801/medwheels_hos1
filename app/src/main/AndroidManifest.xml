@@ -24,14 +24,14 @@
             android:name=".login_admin"
             android:exported="false" />
         <activity
-            android:name=".login_page_driver"
-            android:exported="true" />
+            android:name=".patRecyclerView"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".patRecyclerView"
-            android:exported="false">
+            android:name=".login_page_driver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
