@@ -48,7 +48,14 @@ public class patRecyclerView extends AppCompatActivity {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HelperClass helper = dataSnapshot.getValue(HelperClass.class);
+
+
+
+
+
+
                     list.add(helper);
+
 
                 }
                 myAdapter.notifyDataSetChanged();

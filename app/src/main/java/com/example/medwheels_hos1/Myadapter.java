@@ -43,13 +43,13 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder>{
 
         holder.itemView.setOnClickListener(v -> {
             //navigate to chat activity;
-//            Intent intent = new Intent(context, doctor_appointment_full_screen.class);
+            Intent intent = new Intent(context, MainActivity.class);
 //            intent.putExtra("username","Dr."+helperclass.getName());
 //            intent.putExtra("specialist",helperclass.getSpeacilist());
 //            intent.putExtra("doc_mail",helperclass.getEmail());
 //            intent.putExtra("Image",list.get(position).getImage());
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(intent);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         });
     }
 
