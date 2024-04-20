@@ -1,10 +1,23 @@
 package com.example.medwheels_hos1;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -41,6 +54,14 @@ public class patRecyclerView extends AppCompatActivity {
         myAdapter = new Myadapter(this, list);
         recyclerView.setAdapter(myAdapter);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if(ContextCompat.checkSelfPermission(patRecyclerView.this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(patRecyclerView.this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},101);
+            }
+        }
+        
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -50,7 +71,7 @@ public class patRecyclerView extends AppCompatActivity {
                     HelperClass helper = dataSnapshot.getValue(HelperClass.class);
 
 
-
+                    makenotifications();
 
 
 
@@ -74,4 +95,50 @@ public class patRecyclerView extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void makenotifications(){
+        Toast.makeText(patRecyclerView.this,"working rv",Toast.LENGTH_SHORT).show();
+        String chanelID = "CHANEL_ID_NOTIFICATION";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),chanelID);
+        builder.setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Notification Title")
+                .setContentText("Emergency")
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("data","Some value to be passed here");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,
+                PendingIntent.FLAG_MUTABLE);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD){
+            NotificationChannel notificationChannel =
+                    null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel = notificationManager.getNotificationChannel(chanelID);
+            }
+            if(notificationChannel == null){
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notificationChannel = new NotificationChannel(chanelID,"Some description",importance);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notificationChannel.setLightColor(Color.GREEN);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notificationChannel.enableVibration(true);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notificationManager.createNotificationChannel(notificationChannel);
+                }
+            }
+        }
+        notificationManager.notify(0,builder.build());
+
+    }
+
 }

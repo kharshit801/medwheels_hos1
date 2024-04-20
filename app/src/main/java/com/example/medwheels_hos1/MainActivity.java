@@ -128,9 +128,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             if (locationCircle != null) {
                                 locationCircle.remove();
                             }
+
+
+
                             CircleOptions circleOptions = new CircleOptions()
                                     .center(currentLocation)
-                                    .radius(1000) // Set the radius in meters
+                                    .radius(10000) // Set the radius in meters
                                     .fillColor(0x20FF0000) // Set the fill color with transparency
                                     .strokeColor(Color.RED) // Set the stroke color
                                     .strokeWidth(5); // Set the stroke width
