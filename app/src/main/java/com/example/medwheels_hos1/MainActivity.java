@@ -15,10 +15,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.PDPage;
+//import org.apache.pdfbox.pdmodel.PDPageContentStream;
+//import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -45,10 +45,6 @@ import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.TravelMode;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
                 String pdfFileName = "my_pdf_file.pdf";
                 String pdfContent = "This is the content of my PDF file.";
-                generatePDF(pdfFileName, pdfContent);
+//                generatePDF(pdfFileName, pdfContent);
             }
         });
         assign.setOnClickListener(new View.OnClickListener() {
@@ -108,37 +104,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void createPdfDocument() {
-        String name = "Harshit";
-        String email = "kharshit801@gmail.com";
-        // ... (get other user input data)
 
-        try {
-            File file = new File(Environment.getExternalStorageDirectory(), "MyPdfDocument.pdf");
-            PDDocument document = new PDDocument();
-            PDPage page = new PDPage();
-            document.addPage(page);
 
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            contentStream.beginText();
-            contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-            contentStream.newLineAtOffset(25, 700);
-            contentStream.showText("Name: " + name);
-            contentStream.newLine();
-            contentStream.showText("Email: " + email);
-            // ... (add other user input data)
-            contentStream.endText();
-            contentStream.close();
-
-            document.save(file);
-            document.close();
-
-            Toast.makeText(this, "PDF document created successfully", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error creating PDF document", Toast.LENGTH_SHORT).show();
-        }
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -291,47 +258,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            Log.e("Distance", "I/O error: " + e.getMessage());
 //        }
 //    }
-private void generatePDF(String pdfFileName, String pdfContent) {
-    try {
-        // Create a new PDF document
-        PDDocument document = new PDDocument();
-
-        // Create a new blank page in the document
-        PDPage page = new PDPage();
-        document.addPage(page);
-
-        // Create a PDPageContentStream object to write content to the page
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-        // Begin text operations
-        contentStream.beginText();
-
-        // Set the font and font size
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-
-        // Set the leading (line spacing)
-        contentStream.setLeading(14.5f);
-
-        // Write the content to the page
-        contentStream.newLineAtOffset(25, 700);
-        contentStream.showText(pdfContent);
-
-        // End text operations
-        contentStream.endText();
-
-        // Close the content stream
-        contentStream.close();
-
-        // Save the document to a file
-        File file = new File(getExternalFilesDir(null), pdfFileName);
-        document.save(file);
-
-        // Close the document
-        document.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+//private void generatePDF(String pdfFileName, String pdfContent) {
+//    try {
+//        // Create a new PDF document
+//        PDDocument document = new PDDocument();
+//
+//        // Create a new blank page in the document
+//        PDPage page = new PDPage();
+//        document.addPage(page);
+//
+//        // Create a PDPageContentStream object to write content to the page
+//        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+//
+//        // Begin text operations
+//        contentStream.beginText();
+//
+//        // Set the font and font size
+//        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+//
+//        // Set the leading (line spacing)
+//        contentStream.setLeading(14.5f);
+//
+//        // Write the content to the page
+//        contentStream.newLineAtOffset(25, 700);
+//        contentStream.showText(pdfContent);
+//
+//        // End text operations
+//        contentStream.endText();
+//
+//        // Close the content stream
+//        contentStream.close();
+//
+//        // Save the document to a file
+//        File file = new File(getExternalFilesDir(null), pdfFileName);
+//        document.save(file);
+//
+//        // Close the document
+//        document.close();
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
 }
 
-}
+
 
