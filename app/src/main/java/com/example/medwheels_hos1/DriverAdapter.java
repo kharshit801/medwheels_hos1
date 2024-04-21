@@ -84,4 +84,4 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.MyViewHold
             assign = itemView.findViewById(R.id.assign);
         }
     }
-    }
+}

@@ -43,6 +43,9 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".patientInfo"
+            android:exported="false" />
+        <activity
             android:name=".login_page_driver"
             android:exported="true">
             <intent-filter>

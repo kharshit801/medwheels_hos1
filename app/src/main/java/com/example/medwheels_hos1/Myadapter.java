@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,17 +38,21 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder>{
 
         HelperClass helperclass = list.get(position);
         holder.Name.setText(helperclass.getName());
-//        holder.Spec.setText(helperclass.getSpeacilist());
-//        Glide.with(context).load(list.get(position).getImage()).into(holder.doc_photo);
+
+        holder.detailButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context,patientInfo.class);
+            intent.putExtra("name",helperclass.getName());
+            intent.putExtra("dob",helperclass.getDob());
+            intent.putExtra("bloodg",helperclass.getBlood_d());
+            intent.putExtra("allergy",helperclass.getAll());
+            intent.putExtra("medh",helperclass.getMed());
+            context.startActivity(intent);
+        });
 
 
         holder.itemView.setOnClickListener(v -> {
-            //navigate to chat activity;
             Intent intent = new Intent(context, MainActivity.class);
-//            intent.putExtra("username","Dr."+helperclass.getName());
-//            intent.putExtra("specialist",helperclass.getSpeacilist());
-//            intent.putExtra("doc_mail",helperclass.getEmail());
-//            intent.putExtra("Image",list.get(position).getImage());
+
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
@@ -59,30 +64,20 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder>{
         return list.size();
     }
 
-//    public void searchDataList(ArrayList<HelperClass> filterlist){
-//        list = filterlist;
-//        notifyDataSetChanged();
-//    }
-//
-//    public void searchDataList_Name(ArrayList<HelperClass> filterlist){
-//        list = filterlist;
-//        notifyDataSetChanged();
-//    }
 
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Name, Spec;
-        ImageView doc_photo;
-        ImageButton chat;
+        TextView Name;
+        Button detailButton;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             Name = itemView.findViewById(R.id.patName);
-//            Spec = itemView.findViewById(R.id.docSpec);
-//            doc_photo = itemView.findViewById(R.id.recImage);
-//            chat = itemView.findViewById(R.id.chat_icon);
+            detailButton = itemView.findViewById(R.id.detailBtn);
+
 
         }
     }
